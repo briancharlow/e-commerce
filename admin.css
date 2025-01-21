@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+* {
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal; 
+    margin: 0;
+    padding: 0;
+    
+}
+
+.container {
+  width: 100%;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    
+}
+header ion-icon{
+    color: #f04770;
+    font-size: 1.5rem;
+}
+.logout:hover{
+    cursor: pointer;
+    color: #f78c6a;
+}
+.leave{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    color: #f04770;
+    font-size: .75rem;
+}
+.leave:hover{
+    cursor: pointer;
+    color: #f78c6a;
+}
+
+h1 {
+    font-family: "Fredericka the Great", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #0A7075;
+}
+h2{
+    font-family: "Hammersmith One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #0A7075;
+}
+/* Main Content Styles */
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+/* Product List Styles */
+#productList {
+    flex: 3;
+}
+
+#productsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#productsTable th,
+#productsTable td {
+    border: 1px solid #0A7075;
+    padding: 12px;
+}
+
+#productsTable th {
+    background-color: #0c969c;
+    color: white;
+}
+
+/* Product Form Styles */
+#productFormContainer {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    margin-left: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#productForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#productForm input[type=text],
+#productForm input[type=url],
+#productForm input[type=number] {
+    width: calc(100% - 10px);
+    padding: 10px;
+    margin-bottom: 15px;
+}
+#productForm input:focus{
+    outline: none;
+    border: 1px solid #0A7075;
+}
+
+button[type=submit] {
+    background-color: #0c969c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover {
+    background-color:#0A7075 ; 
+}
+.editBtn, .deleteBtn {
+    background-color: #0c969c;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.editBtn:hover, .deleteBtn:hover {
+    background-color:#0A7075 ; 
+}
+.deleteBtn{
+    background-color: #f04770;
+    
+    
+}
+
+.deleteBtn:hover{
+    background-color: #f78c6a;
+
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
