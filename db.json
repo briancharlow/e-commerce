@@ -1,0 +1,111 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "johndoe@gmail.com",
+      "password": "password"
+    },
+    {
+      "id": "c37b",
+      "name": "Brian Kyalo",
+      "email": "briankyalo416@gmail.com",
+      "password": "BrianKyalo"
+    },
+    {
+      "id": "2fc9",
+      "name": "Brian Kyalo",
+      "email": "briankyalo416@gmail.com",
+      "password": "xyzzz"
+    },
+    {
+      "id": "9060",
+      "name": "Daniel James",
+      "email": "daniel@gmail.com",
+      "password": "daniel"
+    },
+    {
+      "id": "20c1",
+      "name": "clifford",
+      "email": "briankyalo416@gmail.com",
+      "password": "Clifford@123"
+    },
+    {
+      "id": "14bb",
+      "name": "emmanuel davis",
+      "email": "davis@gmail.com",
+      "password": "Davis@123"
+    },
+    {
+      "id": "6978",
+      "name": "Daniel James",
+      "email": "daniel2@gmail.com",
+      "password": "DanielS@123"
+    },
+    {
+      "id": "27ff",
+      "name": "Daniel James",
+      "email": "assssshh@gmail.com",
+      "password": "Ashhh@123"
+    },
+    {
+      "id": "1cd6",
+      "name": "Daniel James",
+      "email": "mwangangi.brian20@students.dkut.ac.ke",
+      "password": "Brian@123"
+    },
+    {
+      "id": "6c93",
+      "name": "Daniel James",
+      "email": "iiipcv8oxm@gmail.com",
+      "password": "Ryyyyhy!133"
+    },
+    {
+      "id": "9d32",
+      "name": "Daniel James",
+      "email": "dav6is@gmail.com",
+      "password": "kkkkkkkkA@w8"
+    },
+    {
+      "id": "904f",
+      "name": "Daniel James",
+      "email": "davis3@gmail.com",
+      "password": "Davis@gam2"
+    },
+    {
+      "id": "695e",
+      "name": "Daniel James",
+      "email": "Whhhhh@gmail.com",
+      "password": "Wqw2RR@dd"
+    },
+    {
+      "id": "93c8",
+      "name": "Daniel James",
+      "email": "iiipc85xm@gmail.com",
+      "password": "Daniel@1222"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "title": "Post 1",
+      "content": "Content 1",
+      "userId": 1,
+      "price": 100
+    }
+  ],
+  "cart": [
+    {
+      "id": "1",
+      "userId": 1,
+      "products": [
+        {
+          "productId": 1,
+          "quantity": 2,
+          "price": 100
+        }
+      ],
+      "time": "2025-01-01"
+    }
+  ]
+}
