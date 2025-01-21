@@ -78,6 +78,7 @@ async function handleRegister(form) {
     
     if (emailExists) {
         errors.push("This email is already registered. Please use a different email.");
+        return;
     }
 
     if (errors.length > 0) {
@@ -85,7 +86,17 @@ async function handleRegister(form) {
         return;
     }
 
-    const user = { name, email, password };
+  
+    const sessionToken = btoa(email + ':' + Date.now());
+
+    console.log('initial sessionToken:', sessionToken);
+
+    const user = {
+        name,
+        email,
+        password, 
+        sessionToken
+    };
 
     try {
         const response = await fetch('http://localhost:3000/users', {
@@ -97,13 +108,22 @@ async function handleRegister(form) {
         });
 
         if (response.ok) {
-            window.location.href = 'artifacts.html';
-        } else if (response.status === 409) {
-            const errorData = await response.json();
-            alert(`Failed to register user: ${errorData.message || 'Email already in use.'}`);
+            const newUser = await response.json();
+            console.log(`User ${newUser.name} registered successfully!`);
+
+        
+          
+            localStorage.setItem('sessionToken', newUser.sessionToken);
+            localStorage.setItem('currentUser', JSON.stringify({
+                id: newUser.id,
+                name: newUser.name,
+                email: newUser.email
+            }));
+           
+             window.location.href = 'artifacts.html';
+            console.log('sessionToken:', newUser.sessionToken);
         } else {
-            const errorData = await response.json();
-            alert(`Failed to register user: ${errorData.message || 'Unknown error'}`);
+            alert('Failed to register user. Please try again.');
         }
     } catch (error) {
         console.error('Error:', error);
@@ -136,8 +156,33 @@ async function handleLogin(form) {
         const user = users.find(user => user.email === email && user.password === password);
 
         if (user) {
-            console.log(`Login successful! Welcome back, ${user.name}!`);
-            window.location.href = 'artifacts.html';
+           
+            const sessionToken = btoa(email + ':' + Date.now());
+            console.log('sessionToken:', sessionToken);
+           
+            const updateResponse = await fetch(`http://localhost:3000/users/${user.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ sessionToken })
+            });
+
+            if (updateResponse.ok) {
+                const updatedUser = await updateResponse.json();
+               
+                localStorage.setItem('sessionToken', sessionToken);
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: updatedUser.id,
+                    name: updatedUser.name,
+                    email: updatedUser.email
+                }));
+                console.log(`Login successful! Welcome back, ${updatedUser.name}!`);
+                window.location.href = 'artifacts.html';
+                console.log('sessionToken:', sessionToken);
+            } else {
+                alert('Error updating session. Please try again.');
+            }
         } else {
             alert('Invalid email or password. Please try again.');
         }
@@ -147,5 +192,76 @@ async function handleLogin(form) {
     }
 }
 
-// Initial users fetch
-getUsers();
+// Check if user is already logged in
+function checkAuthStatus() {
+    const sessionToken = localStorage.getItem('sessionToken');
+    const currentUser = localStorage.getItem('currentUser');
+
+    if (sessionToken && currentUser) {
+        // Verify token is still valid in JSON Server
+        verifySession(sessionToken).then(isValid => {
+            if (isValid) {
+                // If on login page, redirect to artifacts
+                if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+                    window.location.href = 'artifacts.html';
+                }
+            } else {
+                // If session is invalid, clear storage
+                logout();
+            }
+        });
+    }
+}
+
+// Verify session token against JSON Server
+async function verifySession(sessionToken) {
+    try {
+        const users = await getUsers();
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const user = users.find(u => u.id === currentUser.id);
+        
+        return user && user.sessionToken === sessionToken;
+    } catch (error) {
+        console.error('Session verification error:', error);
+        return false;
+    }
+}
+
+// Logout function
+function logout() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (currentUser?.id) {
+        // Clear session token in JSON Server
+        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sessionToken: null })
+        }).catch(error => console.error('Error clearing session:', error));
+    }
+
+    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('currentUser');
+    window.location.href = '/';
+}
+
+// Function to protect routes
+function requireAuth() {
+    const sessionToken = localStorage.getItem('sessionToken');
+    if (!sessionToken) {
+        window.location.href = '/';
+        return;
+    }
+
+    verifySession(sessionToken).then(isValid => {
+        if (!isValid) {
+            logout();
+        }
+    });
+}
+
+// Initial auth check
+checkAuthStatus();
+

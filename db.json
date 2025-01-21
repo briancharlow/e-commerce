@@ -83,14 +83,35 @@
       "name": "Daniel James",
       "email": "iiipc85xm@gmail.com",
       "password": "Daniel@1222"
+    },
+    {
+      "id": "bb11",
+      "name": "Haniel James",
+      "email": "davisjames@gmail.com",
+      "password": "James@123"
+    },
+    {
+      "id": "f4e5",
+      "name": "Daniel Craig",
+      "email": "craig@gmail.com",
+      "password": "Craig@123",
+      "sessionToken": "Y3JhaWdAZ21haWwuY29tOjE3Mzc0NDgyNjM0NjU="
+    },
+    {
+      "id": "6bcf",
+      "name": "Daniel Craig",
+      "email": "craig2@gmail.com",
+      "password": "Craig@gmail.com1",
+      "sessionToken": "Y3JhaWcyQGdtYWlsLmNvbToxNzM3NDQ5MjIyODY2"
     }
   ],
   "products": [
     {
       "id": "1",
       "title": "Post 1",
-      "content": "Content 1",
-      "userId": 1,
+      "description": "Content 1",
+      "artist": "Artist 1",
+      "image": "https://via.placeholder.com/150",
       "price": 100
     }
   ],
