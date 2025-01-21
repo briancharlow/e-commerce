@@ -191,27 +191,147 @@ async function handleLogin(form) {
         alert('An error occurred while logging in.');
     }
 }
+// Handle admin login form submission
+const adminLoginForm = document.getElementById('adminLoginForm');
+
+adminLoginForm.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    let errors = [];
+
+    // Validate email format
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        errors.push("Please enter a valid email address.");
+    }
+
+    // Validate password presence
+    if (!password) {
+        errors.push("Password is required.");
+    }
+
+    // Show errors if any
+    if (errors.length > 0) {
+        alert(errors.join("\n")); 
+        return; 
+    }
+
+    try {
+        const users = await getUsers(); // Fetch users from JSON server
+
+        // Check if user exists with matching email and password
+        const user = users.find(user => user.email === email && user.password === password);
+
+        if (user) {
+             const sessionToken = btoa(email + ':' + Date.now());
+            console.log('sessionToken:', sessionToken);
+           
+            const updateResponse = await fetch(`http://localhost:3000/users/${user.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ sessionToken })
+            });
+
+            if (updateResponse.ok) {
+                const updatedUser = await updateResponse.json();
+               
+                localStorage.setItem('sessionToken', sessionToken);
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: updatedUser.id,
+                    name: updatedUser.name,
+                    email: updatedUser.email
+                }));
+            if (email === 'admin@gmail.com') {
+                // Navigate to admin page
+                window.location.href = 'admin.html';
+            } else {
+                // User is authenticated but not an admin
+                alert(`Login successful! Welcome back, ${user.name}!`);
+                console.log(`Login successful! Welcome back, ${user.name}!`);
+                // Redirect to a regular user dashboard or home page
+                window.location.href = 'artifacts.html';
+            }
+        } else {
+            alert('Invalid email or password. Please try again.');
+        }
+    }
+ }catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while logging in.');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('adminLoginModal');
+    const openModalButton = document.getElementById('openModal');
+    const closeModalButton = document.querySelector('.close');
+    
+    // Open the modal when the admin button is clicked
+    openModalButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default anchor behavior
+        modal.style.display = 'block'; // Show the modal
+    });
+
+    // Close the modal when the close button is clicked
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none'; // Hide the modal
+    });
+
+    // Close the modal when clicking outside of it
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none'; // Hide the modal
+        }
+    });
+
+    // Handle form submission (optional)
+//     const adminLoginForm = document.getElementById('adminLoginForm');
+    
+//     adminLoginForm.addEventListener('submit', (event) => {
+//         event.preventDefault();
+//         const email = document.getElementById('email').value;
+//         const password = document.getElementById('password').value;
+
+//         // Perform login logic here (e.g., send data to server)
+//         console.log(`Email: ${email}, Password: ${password}`);
+
+//         // Close modal after submission (if desired)
+//         modal.style.display = 'none';
+        
+//         // Optionally reset form fields
+//         adminLoginForm.reset();
+        
+//         // Add any additional logic for successful login here
+//     });
+});
+
+
 
 // Check if user is already logged in
-function checkAuthStatus() {
-    const sessionToken = localStorage.getItem('sessionToken');
-    const currentUser = localStorage.getItem('currentUser');
+// function checkAuthStatus() {
+//     const sessionToken = localStorage.getItem('sessionToken');
+//     const currentUser = localStorage.getItem('currentUser');
 
-    if (sessionToken && currentUser) {
-        // Verify token is still valid in JSON Server
-        verifySession(sessionToken).then(isValid => {
-            if (isValid) {
-                // If on login page, redirect to artifacts
-                if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-                    window.location.href = 'artifacts.html';
-                }
-            } else {
-                // If session is invalid, clear storage
-                logout();
-            }
-        });
-    }
-}
+//     if (sessionToken && currentUser) {
+//         // Verify token is still valid in JSON Server
+//         verifySession(sessionToken).then(isValid => {
+//             if (isValid) {
+//                 // If on login page, redirect to artifacts
+//                 if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+//                     window.location.href = 'artifacts.html';
+//                 }
+//             } else {
+//                 // If session is invalid, clear storage
+//                 logout();
+//             }
+//         });
+//     }
+// }
 
 // Verify session token against JSON Server
 async function verifySession(sessionToken) {

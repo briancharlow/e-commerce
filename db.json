@@ -2,9 +2,9 @@
   "users": [
     {
       "id": "1",
-      "name": "John Doe",
-      "email": "johndoe@gmail.com",
-      "password": "password"
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "password": "Admin@123"
     },
     {
       "id": "c37b",
@@ -122,8 +122,9 @@
       "products": [
         {
           "productId": 1,
-          "quantity": 2,
-          "price": 100
+          "quantity": 1,
+          "price": 100,
+          "image": "https://via.placeholder.com/150"
         }
       ],
       "time": "2025-01-01"

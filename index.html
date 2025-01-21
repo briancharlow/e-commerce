@@ -16,11 +16,30 @@
                 <a href="index.html">Home</a>
                 <a href="about.html">About</a>  
             </div>
-            <div class="profile">
-                
-                <a href="admin.html">Admin</a>
+            <div class="profile" id="openModal">
+                <a href="#" >Admin</a>
                 <ion-icon name="person-outline"></ion-icon>
             </div>
+            
+            <!-- Popup Modal -->
+            <div id="adminLoginModal" class="modal">
+                <div class="form admin" >
+                    <div class="loginHeader" id="join">
+                        <h1>Admin Login</h1>
+                        <span class="close">&times;</span>
+                        
+                    </div>
+                   
+                    <form id="adminLoginForm" class="admin-login">
+                       
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                       
+                        <input type="password" id="password" name="password" placeholder="password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+            
         </div>
         <div class="hero">
             <img src="./images/hero.jpg" alt="">
