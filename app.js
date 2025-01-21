@@ -289,25 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle form submission (optional)
-//     const adminLoginForm = document.getElementById('adminLoginForm');
-    
-//     adminLoginForm.addEventListener('submit', (event) => {
-//         event.preventDefault();
-//         const email = document.getElementById('email').value;
-//         const password = document.getElementById('password').value;
-
-//         // Perform login logic here (e.g., send data to server)
-//         console.log(`Email: ${email}, Password: ${password}`);
-
-//         // Close modal after submission (if desired)
-//         modal.style.display = 'none';
-        
-//         // Optionally reset form fields
-//         adminLoginForm.reset();
-        
-//         // Add any additional logic for successful login here
-//     });
 });
 
 

@@ -3,12 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brush & Chisel</title>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="cart.css"> 
+    <script defer src="cart.js"></script> <!-- Link to your CSS file -->
 </head>
 <body>
-    <div class="main">
-        <h1>Cart will be loaded shortly</h1>
+    <div class="container">
+        <header>
+            <h1>Your Shopping Cart</h1>
+        </header>
+
+        <main id="cart">
+            <!-- Cart items will be dynamically inserted here -->
+            <div id="cartItems"></div>
+            <div id="cartSummary">
+                <h2>Total: $<span id="totalAmount">0</span></h2>
+                <button id="checkoutButton">Checkout</button>
+            </div>
+        </main>
+
+        <footer>
+            &copy; 2025 Your Company Name
+        </footer>
     </div>
+
     
 </body>
 </html>

@@ -2,6 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const productsTableBody = document.querySelector('#productsTable tbody');
     const productForm = document.getElementById('productForm');
     
+
+    const logoutIcon = document.getElementById('exit');
+
+    logoutIcon.addEventListener('click', () => {
+        
+        localStorage.removeItem('sessionToken');
+        localStorage.removeItem('currentUser');
+
+        
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser?.id) {
+            fetch(`http://localhost:3000/users/${currentUser.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sessionToken: null })
+            }).catch(error => console.error('Error clearing session:', error));
+        }
+
+        
+        window.location.href = 'index.html';
+    });
    
     async function fetchProducts() {
         try {

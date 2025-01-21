@@ -4,7 +4,8 @@
       "id": "1",
       "name": "Admin",
       "email": "admin@gmail.com",
-      "password": "Admin@123"
+      "password": "Admin@123",
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc0NzQxMTM1MzY="
     },
     {
       "id": "c37b",
@@ -88,7 +89,8 @@
       "id": "bb11",
       "name": "Haniel James",
       "email": "davisjames@gmail.com",
-      "password": "James@123"
+      "password": "James@123",
+      "sessionToken": "ZGF2aXNqYW1lc0BnbWFpbC5jb206MTczNzQ5NDAzNDY0NQ=="
     },
     {
       "id": "f4e5",
@@ -165,15 +167,28 @@
   ],
   "cart": [
     {
-      "id": "1",
-      "userId": 1,
-      "time": "2025-01-01",
+      "id": "1737491644842",
+      "userId": "bb11",
+      "time": "2025-01-21T20:34:04.842Z",
+      "isCheckedOut": 0,
       "products": [
         {
-          "productId": 1,
+          "productId": "5cad",
           "quantity": 1,
-          "price": 100,
-          "image": "https://via.placeholder.com/150"
+          "price": 80000,
+          "image": "https://images.pexels.com/photos/1918290/pexels-photo-1918290.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+          "productId": "ffc5",
+          "quantity": 1,
+          "price": 20000,
+          "image": "https://images.pexels.com/photos/39348/musician-trumpet-metal-snowman-39348.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+          "productId": "6b2e",
+          "quantity": 1,
+          "price": 100000,
+          "image": "https://images.pexels.com/photos/3118569/pexels-photo-3118569.jpeg?auto=compress&cs=tinysrgb&w=600"
         }
       ]
     }
