@@ -1,5 +1,16 @@
 const Form = document.getElementById('join');
 
+function displayErrorMessage(message) {
+    const errorMessageDiv = document.getElementById('errorMessage');
+    errorMessageDiv.textContent = message;
+    errorMessageDiv.classList.add('show');
+
+    
+    setTimeout(() => {
+        errorMessageDiv.classList.remove('show');
+    }, 5000); 
+}
+
 async function getUsers() {
     try {
         let response = await fetch('http://localhost:3000/users');
@@ -21,27 +32,30 @@ async function getUsers() {
 Form.addEventListener('click', (event) => {
     if (event.target.id === 'loginSwitch') {
         Form.innerHTML = `
+        <div id="errorMessage" class="error-message"></div>
             <h1>Welcome Back!</h1>
             <form>
-                <input type="email" placeholder="Email" name="email" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="email" placeholder="Email" name="email">
+                <input type="password" name="password" placeholder="Password">
                 <button type="submit" id="login">Login</button>
             </form>
             <p>Don't have an account? <a href="#" id="registerSwitch">Register</a></p>
         `;
     } else if (event.target.id === 'registerSwitch') {
         Form.innerHTML = `
+            
             <h1>Join Us Today!</h1>
             <form>
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="name" placeholder="Name">
+                <input type="email" name="email" placeholder="Email" >
+                <input type="password" name="password" placeholder="Password" >
                 <button type="submit" id="register">Register</button>
             </form>
             <p>Already have an account? <a id="loginSwitch" href="#">Login</a></p>
         `;
     }
 });
+
 
 // Event delegation for form submissions
 Form.addEventListener('submit', async (event) => {
@@ -62,6 +76,13 @@ async function handleRegister(form) {
     const password = form.querySelector('input[name="password"]').value;
     
     let errors = [];
+    const inputFields = document.querySelectorAll('input[required]');
+
+    inputFields.forEach(field => {
+        if (field.value.trim() === '') {
+            errors.push(`Field ${field.name} is required.`);
+        }
+    });
     
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
@@ -82,7 +103,7 @@ async function handleRegister(form) {
     }
 
     if (errors.length > 0) {
-        alert(errors.join("\n"));
+        displayErrorMessage(errors.join("\n"));
         return;
     }
 
@@ -136,6 +157,14 @@ async function handleLogin(form) {
     const password = form.querySelector('input[name="password"]').value;
 
     let errors = [];
+
+    const inputFields = document.querySelectorAll('input[required]');
+
+    inputFields.forEach(field => {
+        if (field.value.trim() === '') {
+            errors.push(`Field ${field.name} is required.`);
+        }
+    });
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {

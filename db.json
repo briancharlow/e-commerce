@@ -111,7 +111,14 @@
       "name": "Daniel James",
       "email": "craig3333@gmail.com",
       "password": "Craig@123",
-      "sessionToken": "Y3JhaWczMzMzQGdtYWlsLmNvbToxNzM3NTQ3MTMxNzA2"
+      "sessionToken": null
+    },
+    {
+      "id": "325e",
+      "name": "Daniel James",
+      "email": "adminrrr@gmail.com",
+      "password": "Admin@123",
+      "sessionToken": null
     }
   ],
   "products": [
