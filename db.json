@@ -349,6 +349,41 @@
       "time": "2025-01-22T11:57:33.955Z",
       "isCheckedOut": 1,
       "products": []
+    },
+    {
+      "id": "b493",
+      "userId": "1",
+      "time": "2025-01-22T16:32:27.615Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "0528",
+      "userId": "1",
+      "time": "2025-01-22T16:49:41.530Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "611b",
+      "userId": "1",
+      "time": "2025-01-22T16:49:53.652Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "dee4",
+      "userId": "1",
+      "time": "2025-01-22T16:52:12.109Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "619f",
+      "userId": "1",
+      "time": "2025-01-22T16:53:22.177Z",
+      "isCheckedOut": 0,
+      "products": []
     }
   ]
 }

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     requireAuth();
 
     const gallery = document.getElementById('gallery');
-
+    const messageDiv = document.getElementById('Message'); // Add a div in HTML for messages
     const heroImage = document.getElementById('heroImage');
     const heroText = document.getElementById('heroText');
 
@@ -29,21 +29,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentIndex = 0;
 
+    // Function to display messages
+    function displayMessage(message, type = 'error') {
+        messageDiv.textContent = message;
+        messageDiv.className = `message ${type}`; // Apply type as a class
+        messageDiv.style.opacity = '1'; // Ensure visible
+        messageDiv.style.display = 'block';
+
+        setTimeout(() => {
+            messageDiv.style.opacity = '0'; // Fade out smoothly
+            setTimeout(() => {
+                messageDiv.style.display = 'none'; // Hide after fade-out
+            }, 500);
+        }, 5000); 
+    }
+
     // Function to update hero image and text
     function updateHero() {
         heroImage.src = heroImages[currentIndex].src;
         heroText.textContent = heroImages[currentIndex].text;
     }
 
-    // Function to change image every 5 seconds
+    // Carousel functionality
     function startCarousel() {
         updateHero();
         setInterval(() => {
-            currentIndex = (currentIndex + 1) % heroImages.length; // Loop back to the start
+            currentIndex = (currentIndex + 1) % heroImages.length; // Loop back
             updateHero();
-        }, 10000); 
+        }, 10000);
     }
 
+    // Fetch and display products
     async function fetchProducts() {
         try {
             const response = await fetch('http://localhost:3000/products');
@@ -56,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
     function displayProducts(products) {
-        gallery.innerHTML = ''; 
+        gallery.innerHTML = '';
         products.forEach(product => {
             const productCard = document.createElement('div');
             productCard.classList.add('product-card');
@@ -66,26 +81,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${product.image}" alt="${product.title}">
                 <h2>${product.title}</h2>
                 <div>
-                  <p>${product.description}</p>
-                <p class="price"> $${product.price}</p>
+                    <p>${product.description}</p>
+                    <p class="price">$${product.price}</p>
                 </div>
-              
-                 <div class="cartContainer">
-                <p class="artist"> ~${product.artist}</p>
-                <a id="addCart" class="cart" data-id="${product.id}">
-                    <ion-icon name="cart-outline"></ion-icon>
-                </a>
-                 </div>
-                
+                <div class="cartContainer">
+                    <p class="artist">~${product.artist}</p>
+                    <a id="addCart" class="cart" data-id="${product.id}">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </a>
+                </div>
             `;
             gallery.appendChild(productCard);
         });
         addCartEventListeners();
     }
 
+    // Cart event listeners
     function addCartEventListeners() {
         const cartIcons = document.querySelectorAll('.cart');
-        
         cartIcons.forEach(icon => {
             icon.addEventListener('click', (event) => {
                 const productId = event.currentTarget.dataset.id;
@@ -93,49 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-     
-     async function fetchCartCount() {
-        try {
-            const response = await fetch('http://localhost:3000/cart');
-            const carts = await response.json();
-            const userCart = carts.find(cart => cart.userId === JSON.parse(localStorage.getItem('currentUser')).id && cart.isCheckedOut === 0);
 
-            if (userCart) {
-                const cartCount = userCart.products.reduce((total, product) => total + product.quantity, 0);
-                document.getElementById('cartCount').textContent = cartCount;
-            } else {
-                document.getElementById('cartCount').textContent = '0';
-            }
-        } catch (error) {
-            console.error('Error fetching cart count:', error);
-            document.getElementById('cartCount').textContent = '0';
-        }
-    }
-
-    
-    fetchCartCount();
-        
     async function addToCart(productId) {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    
+
         if (!currentUser) {
-            alert("Please log in to add items to your cart.");
+            displayMessage("Please log in to add items to your cart.", 'error');
             return;
         }
-    
+
         try {
-            // Fetch all carts from the server
             const cartResponse = await fetch('http://localhost:3000/cart');
             const carts = await cartResponse.json();
-    
-            // Find the user's active cart (where isCheckedOut is 0)
             let userCart = carts.find(cart => cart.userId === currentUser.id && cart.isCheckedOut === 0);
-    
-            // Fetch product details
+
             const productResponse = await fetch(`http://localhost:3000/products/${productId}`);
             const productData = await productResponse.json();
-    
-           
+
             const newProduct = {
                 productId: productId,
                 productTitle: productData.title,
@@ -143,80 +130,78 @@ document.addEventListener('DOMContentLoaded', () => {
                 price: productData.price,
                 image: productData.image
             };
-    
+
             if (userCart) {
-                // Check if the product is already in the cart
                 const existingProduct = userCart.products.find(p => p.productId === productId);
                 if (existingProduct) {
-                    alert("Item already exists in your cart. Please choose other items to add.");
-            
+                    displayMessage("Item already exists in your cart.", 'error');
                 } else {
-                   
                     userCart.products.push(newProduct);
+
+                    await fetch(`http://localhost:3000/cart/${userCart.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ products: userCart.products })
+                    });
+                    await fetchCartCount();
+                    displayMessage("Item added to your cart.", 'success');
                 }
-    
-                
-                await fetch(`http://localhost:3000/cart/${userCart.id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ products: userCart.products })
-                });
-                await fetchCartCount();
-                alert("Item added to your existing cart!");
             } else {
-                
                 const newCart = {
-                  
                     userId: currentUser.id,
                     time: new Date().toISOString(),
                     isCheckedOut: 0,
                     products: [newProduct]
                 };
-    
-                // Save the new cart to the server
+
                 await fetch('http://localhost:3000/cart', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newCart)
                 });
                 await fetchCartCount();
-                alert("A new cart has been created, and the item has been added!");
+                displayMessage("New cart created, and item added.", 'success');
             }
-
         } catch (error) {
             console.error('Error adding item to cart:', error);
-            alert("An error occurred while adding the item to your cart.");
+            displayMessage("An error occurred while adding the item to your cart.", 'error');
         }
     }
-    
-    
 
-    const logoutBtn = document.getElementById('exit');
+    async function fetchCartCount() {
+        try {
+            const response = await fetch('http://localhost:3000/cart');
+            const carts = await response.json();
+            const userCart = carts.find(cart => cart.userId === JSON.parse(localStorage.getItem('currentUser')).id && cart.isCheckedOut === 0);
 
-    logoutBtn.addEventListener('click', logout);
+            document.getElementById('cartCount').textContent = userCart
+                ? userCart.products.reduce((total, product) => total + product.quantity, 0)
+                : '0';
+        } catch (error) {
+            console.error('Error fetching cart count:', error);
+            document.getElementById('cartCount').textContent = '0';
+        }
+    }
+
     function logout() {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        
+
         if (currentUser?.id) {
-            // Clear session token in JSON Server
             fetch(`http://localhost:3000/users/${currentUser.id}`, {
                 method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ sessionToken: null })
             }).catch(error => console.error('Error clearing session:', error));
         }
-    
+
         localStorage.removeItem('sessionToken');
         localStorage.removeItem('currentUser');
         window.location.href = '/';
     }
-    
 
+    document.getElementById('exit').addEventListener('click', logout);
 
-    startCarousel()
-   
-   
+    startCarousel();
     fetchProducts();
+    fetchCartCount();
 });
