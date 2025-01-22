@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         messageDiv.style.display = 'block';
 
         setTimeout(() => {
-            messageDiv.style.opacity = '0'; // Fade out smoothly
+            messageDiv.style.opacity = '0'; 
             setTimeout(() => {
-                messageDiv.style.display = 'none'; // Hide after fade-out
-            }, 500); // Wait for fade-out to complete (500ms)
-        }, 5000); // Show message for 5 seconds
+                messageDiv.style.display = 'none'; 
+            }, 500); 
+        }, 5000); 
     }
 
     // Logout functionality
