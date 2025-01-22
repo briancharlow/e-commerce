@@ -5,7 +5,7 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "Admin@123",
-      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc0NzQxMTM1MzY="
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc1NDY5MzUwNjY="
     },
     {
       "id": "c37b",
@@ -90,7 +90,7 @@
       "name": "Haniel James",
       "email": "davisjames@gmail.com",
       "password": "James@123",
-      "sessionToken": "ZGF2aXNqYW1lc0BnbWFpbC5jb206MTczNzQ5NDAzNDY0NQ=="
+      "sessionToken": null
     },
     {
       "id": "f4e5",
@@ -105,6 +105,13 @@
       "email": "craig2@gmail.com",
       "password": "Craig@gmail.com1",
       "sessionToken": "Y3JhaWcyQGdtYWlsLmNvbToxNzM3NDQ5MjIyODY2"
+    },
+    {
+      "id": "a2fe",
+      "name": "Daniel James",
+      "email": "craig3333@gmail.com",
+      "password": "Craig@123",
+      "sessionToken": "Y3JhaWczMzMzQGdtYWlsLmNvbToxNzM3NTQ3MTMxNzA2"
     }
   ],
   "products": [
@@ -119,7 +126,7 @@
     {
       "title": "Smiling Clown",
       "description": "multicolored skull decor",
-      "artist": "Chvrlow",
+      "artist": "John",
       "image": "https://images.pexels.com/photos/1918290/pexels-photo-1918290.jpeg?auto=compress&cs=tinysrgb&w=600",
       "price": 80000,
       "id": "5cad"
@@ -141,14 +148,6 @@
       "price": 600
     },
     {
-      "id": "6b2e",
-      "title": "Hindu god",
-      "description": "Hindu god Rama",
-      "artist": "Ramcharan",
-      "image": "https://images.pexels.com/photos/3118569/pexels-photo-3118569.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "price": 100000
-    },
-    {
       "title": "Flying Man",
       "description": "Hanging Man",
       "artist": "Mantis",
@@ -163,6 +162,14 @@
       "artist": "Van Gogh",
       "image": "https://media.istockphoto.com/id/154121929/photo/north-korea-dpr-1986-mona-lisa-leonardo-da-vinci.jpg?b=1&s=612x612&w=0&k=20&c=WUiLAi--08juirtjc4aWUilf6TKf8HfG3UQonfSKEnI=",
       "price": 700099
+    },
+    {
+      "id": "c54b",
+      "title": "Revenant",
+      "description": "revvv",
+      "artist": "Dante",
+      "image": "https://images.pexels.com/photos/1022934/pexels-photo-1022934.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "price": 900000
     }
   ],
   "cart": [
@@ -170,19 +177,14 @@
       "id": "1737491644842",
       "userId": "bb11",
       "time": "2025-01-21T20:34:04.842Z",
-      "isCheckedOut": 0,
+      "isCheckedOut": 1,
       "products": [
         {
           "productId": "5cad",
+          "productTitle": "Smiling Clown",
           "quantity": 1,
           "price": 80000,
           "image": "https://images.pexels.com/photos/1918290/pexels-photo-1918290.jpeg?auto=compress&cs=tinysrgb&w=600"
-        },
-        {
-          "productId": "ffc5",
-          "quantity": 1,
-          "price": 20000,
-          "image": "https://images.pexels.com/photos/39348/musician-trumpet-metal-snowman-39348.jpeg?auto=compress&cs=tinysrgb&w=600"
         },
         {
           "productId": "6b2e",
@@ -191,6 +193,149 @@
           "image": "https://images.pexels.com/photos/3118569/pexels-photo-3118569.jpeg?auto=compress&cs=tinysrgb&w=600"
         }
       ]
+    },
+    {
+      "id": "1737529872838",
+      "userId": "bb11",
+      "time": "2025-01-22T07:11:12.838Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737530032142",
+      "userId": "bb11",
+      "time": "2025-01-22T07:13:52.142Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737535538890",
+      "userId": "bb11",
+      "time": "2025-01-22T08:45:38.890Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737535740698",
+      "userId": "bb11",
+      "time": "2025-01-22T08:49:00.698Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737535780335",
+      "userId": "bb11",
+      "time": "2025-01-22T08:49:40.335Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737536162880",
+      "userId": "bb11",
+      "time": "2025-01-22T08:56:02.880Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737536203216",
+      "userId": "bb11",
+      "time": "2025-01-22T08:56:43.216Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737536435827",
+      "userId": "bb11",
+      "time": "2025-01-22T09:00:35.827Z",
+      "isCheckedOut": 1,
+      "products": [
+        {
+          "productId": "ffc5",
+          "quantity": 1,
+          "price": 20000,
+          "image": "https://images.pexels.com/photos/39348/musician-trumpet-metal-snowman-39348.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }
+      ],
+      "checkoutDate": "2025-01-22"
+    },
+    {
+      "id": "1737536545724",
+      "userId": "bb11",
+      "time": "2025-01-22T09:02:25.724Z",
+      "isCheckedOut": 1,
+      "products": [
+        {
+          "productId": "a1ea",
+          "quantity": 1,
+          "price": 700099,
+          "image": "https://media.istockphoto.com/id/154121929/photo/north-korea-dpr-1986-mona-lisa-leonardo-da-vinci.jpg?b=1&s=612x612&w=0&k=20&c=WUiLAi--08juirtjc4aWUilf6TKf8HfG3UQonfSKEnI="
+        }
+      ],
+      "checkoutDate": "2025-01-22"
+    },
+    {
+      "id": "1737537091962",
+      "userId": "bb11",
+      "time": "2025-01-22T09:11:31.962Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737537256627",
+      "userId": "bb11",
+      "time": "2025-01-22T09:14:16.627Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737537490939",
+      "userId": "bb11",
+      "time": "2025-01-22T09:18:10.939Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "1737539972383",
+      "userId": "bb11",
+      "time": "2025-01-22T09:59:32.383Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "75eb",
+      "userId": "bb11",
+      "time": "2025-01-22T10:05:35.455Z",
+      "isCheckedOut": 0,
+      "products": [
+        {
+          "productId": "18aa",
+          "productTitle": "Abyss Eyes",
+          "quantity": 1,
+          "price": 600,
+          "image": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+          "productId": "6b2e",
+          "productTitle": "Hindu goddess",
+          "quantity": 1,
+          "price": 100000,
+          "image": "https://images.pexels.com/photos/3118569/pexels-photo-3118569.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        {
+          "productId": "a8e3",
+          "productTitle": "The Wind Whispers",
+          "quantity": 1,
+          "price": 20000,
+          "image": "https://images.pexels.com/photos/1727658/pexels-photo-1727658.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }
+      ]
+    },
+    {
+      "id": "f5aa",
+      "userId": "a2fe",
+      "time": "2025-01-22T11:57:33.955Z",
+      "isCheckedOut": 1,
+      "products": []
     }
   ]
 }

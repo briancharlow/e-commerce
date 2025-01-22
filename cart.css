@@ -1,43 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
+
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Merriweather", serif;
+    font-weight: 300;
+    font-style: normal; 
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+   
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Header Styles */
 header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+ 
 }
 
 h1 {
-    margin: 0;
+    font-family: "Fredericka the Great", serif;
+    font-weight: 400;
+    font-style: normal;
+    color:  #0A7075
 }
 
-/* Cart Styles */
+.links{
+    display: flex;
+    gap: 2rem;
+}
+
+.links a{
+    text-decoration: none;
+    color: #0A7075;
+    font-weight: 500;
+}
+.links a:hover{
+    color: #0c969c;
+}
+header ion-icon{
+    color: #f04770;
+    font-size: 1.5rem;
+}
+
+.leave{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    color: #f04770;
+    font-size: .75rem;
+}
+.leave:hover{
+    cursor: pointer;
+    color: #f78c6a;
+}
 #cart {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 60vw;
 }
 
 .cart-item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+   align-items: center;
+    justify-content: flex-start;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 10px;
     margin-bottom: 15px;
+    width: 40vw;
+    gap: 3rem;
+}
+.item-details{
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.removeButton {
+    background-color: #f04770;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.removeButton:hover {
+    background-color: #f78c6a;
 }
 
 .cart-item img {
@@ -45,9 +109,9 @@ h1 {
    height : auto; /* Maintain aspect ratio */
 }
 
-.cart-item h3,
-.cart-item p {
-   margin-left : 10px; /* Space between image and text */
+.cart-item h3
+ {
+   color: #f04770;
 }
 
 /* Checkout Button Styles */

@@ -42,7 +42,19 @@ header ion-icon{
     cursor: pointer;
     color: #f78c6a;
 }
+a{
+    text-decoration: none;
+    color: #0A7075;
+    font-weight: 500;
 
+}
+a:hover{
+    color: #0c969c;
+}
+.links{
+    display: flex;
+    gap: 2rem;
+}
 h1 {
     font-family: "Fredericka the Great", serif;
     font-weight: 400;

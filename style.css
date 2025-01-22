@@ -83,13 +83,14 @@ a{
 a:hover{
     color: #0c969c;
 }
-.logo{
-    height: 3rem;
-}
 .links{
     display: flex;
     gap: 2rem;
 }
+.logo{
+    height: 3rem;
+}
+
 .profile{
     display: flex;
     align-items: center;

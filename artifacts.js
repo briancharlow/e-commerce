@@ -93,6 +93,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+     
+     async function fetchCartCount() {
+        try {
+            const response = await fetch('http://localhost:3000/cart');
+            const carts = await response.json();
+            const userCart = carts.find(cart => cart.userId === JSON.parse(localStorage.getItem('currentUser')).id && cart.isCheckedOut === 0);
+
+            if (userCart) {
+                const cartCount = userCart.products.reduce((total, product) => total + product.quantity, 0);
+                document.getElementById('cartCount').textContent = cartCount;
+            } else {
+                document.getElementById('cartCount').textContent = '0';
+            }
+        } catch (error) {
+            console.error('Error fetching cart count:', error);
+            document.getElementById('cartCount').textContent = '0';
+        }
+    }
+
+    
+    fetchCartCount();
         
     async function addToCart(productId) {
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -114,9 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const productResponse = await fetch(`http://localhost:3000/products/${productId}`);
             const productData = await productResponse.json();
     
-            // Prepare the product to be added
+           
             const newProduct = {
                 productId: productId,
+                productTitle: productData.title,
                 quantity: 1,
                 price: productData.price,
                 image: productData.image
@@ -139,12 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ products: userCart.products })
                 });
-    
+                await fetchCartCount();
                 alert("Item added to your existing cart!");
             } else {
-                // If no active cart exists, create a new one
+                
                 const newCart = {
-                    id: Date.now().toString(), // Generate a unique ID for the new cart
+                  
                     userId: currentUser.id,
                     time: new Date().toISOString(),
                     isCheckedOut: 0,
@@ -157,9 +179,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newCart)
                 });
-    
+                await fetchCartCount();
                 alert("A new cart has been created, and the item has been added!");
             }
+
         } catch (error) {
             console.error('Error adding item to cart:', error);
             alert("An error occurred while adding the item to your cart.");

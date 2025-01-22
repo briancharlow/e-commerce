@@ -1,5 +1,31 @@
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    requireAuth(); // Protect this route
+
+    const logoutIcon = document.getElementById('exit');
+    logoutIcon.addEventListener('click', () =>{
+        function logout() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser?.id) {
+                // Clear session token in JSON Server
+                fetch(`http://localhost:3000/users/${currentUser.id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ sessionToken: null })
+                }).catch(error => console.error('Error clearing session:', error));
+            }
+        
+            localStorage.removeItem('sessionToken');
+            localStorage.removeItem('currentUser');
+            window.location.href = '/';
+        }
+        logout();        
+    });
+
     const cartItemsDiv = document.getElementById('cartItems');
     const totalAmountSpan = document.getElementById('totalAmount');
     const checkoutButton = document.getElementById('checkoutButton');
@@ -45,17 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
             itemDiv.classList.add('cart-item');
             itemDiv.innerHTML = `
                 <img src="${product.image}" alt="">
-                <h3>${product.productId}</h3> <!-- You may want to fetch product details using productId -->
+                <div class="item-details">
+                
+                <h3>${product.productTitle}</h3>
                 <p>Price: $${product.price}</p>
-                <p>Quantity: ${product.quantity}</p>
+                
                 <button class="removeButton" data-id="${product.productId}">Remove</button>
+                </div>
             `;
             cartItemsDiv.appendChild(itemDiv);
             
             totalAmount += product.price * product.quantity; // Calculate total amount
         });
 
-        totalAmountSpan.textContent = totalAmount.toFixed(2); // Update total amount display
+        totalAmountSpan.textContent = totalAmount.toFixed(2); 
 
         // Add event listeners for remove buttons
         const removeButtons = document.querySelectorAll('.removeButton');
@@ -77,9 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const userCart = carts.find(cart => cart.userId === currentUser.id && cart.isCheckedOut === 0);
 
             if (userCart) {
-                userCart.products = userCart.products.filter(product => product.productId !== productId); // Remove product
-
-                // Update the cart on the server
+                userCart.products = userCart.products.filter(product => product.productId !== productId); 
                 await fetch(`http://localhost:3000/cart/${userCart.id}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
@@ -95,35 +122,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Checkout function
-    async function checkout() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+   async function checkout() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-        try {
-            const response = await fetch('http://localhost:3000/cart');
-            const carts = await response.json();
-            const userCart = carts.find(cart => cart.userId === currentUser.id && cart.isCheckedOut === 0);
+    try {
+        const response = await fetch('http://localhost:3000/cart');
+        const carts = await response.json();
+        const userCart = carts.find(cart => cart.userId === currentUser.id && cart.isCheckedOut === 0);
 
-            if (userCart) {
-                userCart.isCheckedOut = 1; // Mark as checked out
+        if (userCart) {
+            // Save the products array before clearing it
+            const purchasedProducts = [...userCart.products];
 
-                // Update the cart on the server
-                await fetch(`http://localhost:3000/cart/${userCart.id}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ isCheckedOut: userCart.isCheckedOut })
-                });
+            userCart.isCheckedOut = 1; // Mark as checked out
 
-                alert("Thank you for your purchase!");
-                window.location.href = 'artifacts.html'; // Redirect to products page after checkout
-            }
-        } catch (error) {
-            console.error('Error during checkout:', error);
-            alert("An error occurred during checkout.");
+            // Update the cart on the server
+            await fetch(`http://localhost:3000/cart/${userCart.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    isCheckedOut: userCart.isCheckedOut,
+                    products: [] // Clear the products array
+                })
+            });
+
+            window.location.href = 'artifacts.html';
+            alert("Thank you for your purchase!");
         }
+    } catch (error) {
+        console.error('Error during checkout:', error);
+        alert("An error occurred during checkout.");
     }
+}
 
-    // Event listener for checkout button
+  
     checkoutButton.addEventListener('click', checkout);
 
     // Fetch the user's active cart when the page loads

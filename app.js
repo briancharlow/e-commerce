@@ -17,7 +17,7 @@ async function getUsers() {
     }
 }
 
-// Event delegation for form switching
+
 Form.addEventListener('click', (event) => {
     if (event.target.id === 'loginSwitch') {
         Form.innerHTML = `

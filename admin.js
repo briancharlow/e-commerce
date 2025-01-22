@@ -134,6 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial fetch of products when the page loads
+  
     fetchProducts();
 });

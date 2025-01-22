@@ -5,12 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="cart.css"> 
-    <script defer src="cart.js"></script> <!-- Link to your CSS file -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script defer type="module" src="cart.js"></script> 
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Your Shopping Cart</h1>
+        <header class="header">
+            <h1>
+               Your Cart
+            </h1>
+            <div class="links">
+                <a href="index.html">Home</a>
+                <a href="artifacts.html">Gallery</a>  
+            </div>
+        <div class="links2">
+
+            <div id="exit" class="leave">
+                <h3>Log Out</h3>
+                <ion-icon id="logout" name="log-out-outline"></ion-icon>
+            </div>
+        </div>
         </header>
 
         <main id="cart">
@@ -23,10 +37,10 @@
         </main>
 
         <footer>
-            &copy; 2025 Your Company Name
+            &copy; 2025 Brush & Chisel
         </footer>
     </div>
-
+   
     
 </body>
 </html>

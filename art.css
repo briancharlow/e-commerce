@@ -25,6 +25,28 @@ a{
 a:hover{
     color: #0c969c;
 }
+.cart-link {
+    position: relative; 
+    display: inline-block; 
+}
+
+.view-cart {
+    width: 30px;
+    height: auto; 
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px; 
+    background-color: red; 
+    color: white; 
+    padding: 2px 7px;
+    border-radius: 50%; 
+    font-size: 12px; 
+}
+
+
 .links{
     display: flex;
     gap: 2rem;
