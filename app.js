@@ -1,15 +1,98 @@
 const Form = document.getElementById('join');
 
-// function displayErrorMessage(message) {
-//     const errorMessageDiv = document.getElementById('errorMessage');
-//     errorMessageDiv.textContent = message;
-//     errorMessageDiv.classList.add('show');
+function displayErrorMessage(message) {
+    const errorMessageDiv = document.getElementById('errorMessage');
+    if (message) {
+        errorMessageDiv.textContent = message;
+        errorMessageDiv.classList.add('show');
 
+        setTimeout(() => {
+            errorMessageDiv.classList.remove('show');
+        }, 5000);
+    } else {
+        errorMessageDiv.textContent = '';
+        errorMessageDiv.classList.remove('show');
+    }
+}
+
+async function handleRegister(form) {
+    const name = form.querySelector('input[name="name"]').value.trim();
+    const email = form.querySelector('input[name="email"]').value.trim();
+    const password = form.querySelector('input[name="password"]').value.trim();
     
-//     setTimeout(() => {
-//         errorMessageDiv.classList.remove('show');
-//     }, 5000); 
-// }
+    let errors = [];
+    const inputFields = form.querySelectorAll('input[required]');
+
+    inputFields.forEach(field => {
+        if (field.value.trim() === '') {
+            errors.push(`Field ${field.name} is required.`);
+        }
+    });
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && !emailPattern.test(email)) {
+        errors.push("Please enter a valid email address.");
+    }
+
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (password && !passwordPattern.test(password)) {
+        errors.push("Password must be at least 8 characters long, contain at least one uppercase letter and one number.");
+    }
+
+    const users = await getUsers();
+    const emailExists = users.some(user => user.email === email);
+    
+    if (emailExists) {
+        errors.push("This email is already registered. Please use a different email.");
+    }
+
+    if (errors.length > 0) {
+        displayErrorMessage(errors.join("\n"));
+        return;
+    }
+
+    // Clear error messages if no errors
+    displayErrorMessage('');
+
+    const sessionToken = btoa(email + ':' + Date.now());
+
+    const user = {
+        name,
+        email,
+        password,
+        sessionToken
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (response.ok) {
+            const newUser = await response.json();
+            console.log(`User ${newUser.name} registered successfully!`);
+
+            localStorage.setItem('sessionToken', newUser.sessionToken);
+            localStorage.setItem('currentUser', JSON.stringify({
+                id: newUser.id,
+                name: newUser.name,
+                email: newUser.email
+            }));
+           
+            window.location.href = 'artifacts.html';
+        } else {
+            alert('Failed to register user. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while registering the user.');
+    }
+}
+
 
 async function getUsers() {
     try {
@@ -32,7 +115,7 @@ async function getUsers() {
 Form.addEventListener('click', (event) => {
     if (event.target.id === 'loginSwitch') {
         Form.innerHTML = `
-    
+            <div id="errorMessage" class="error-message"></div>
             <h1>Welcome Back!</h1>
             <form>
                 <input type="email" placeholder="Email" name="email">
@@ -43,7 +126,7 @@ Form.addEventListener('click', (event) => {
         `;
     } else if (event.target.id === 'registerSwitch') {
         Form.innerHTML = `
-            
+            <div id="errorMessage" class="error-message"></div>
             <h1>Join Us Today!</h1>
             <form>
                 <input type="text" name="name" placeholder="Name">
@@ -70,95 +153,14 @@ Form.addEventListener('submit', async (event) => {
     }
 });
 
-async function handleRegister(form) {
-    const name = form.querySelector('input[name="name"]').value;
-    const email = form.querySelector('input[name="email"]').value;
-    const password = form.querySelector('input[name="password"]').value;
-    
-    let errors = [];
-    const inputFields = document.querySelectorAll('input[required]');
 
-    inputFields.forEach(field => {
-        if (field.value.trim() === '') {
-            errors.push(`Field ${field.name} is required.`);
-        }
-    });
-    
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        errors.push("Please enter a valid email address.");
-    }
-
-    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (!passwordPattern.test(password)) {
-        errors.push("Password must be at least 8 characters long, contain at least one uppercase letter and one number.");
-    }
-
-    const users = await getUsers();
-    const emailExists = users.some(user => user.email === email);
-    
-    if (emailExists) {
-        errors.push("This email is already registered. Please use a different email.");
-        return;
-    }
-
-    if (errors.length > 0) {
-        displayErrorMessage(errors.join("\n"));
-        return;
-    }
-
-  
-    const sessionToken = btoa(email + ':' + Date.now());
-
-    console.log('initial sessionToken:', sessionToken);
-
-    const user = {
-        name,
-        email,
-        password, 
-        sessionToken
-    };
-
-    try {
-        const response = await fetch('http://localhost:3000/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-
-        if (response.ok) {
-            const newUser = await response.json();
-            console.log(`User ${newUser.name} registered successfully!`);
-
-        
-          
-            localStorage.setItem('sessionToken', newUser.sessionToken);
-            localStorage.setItem('currentUser', JSON.stringify({
-                id: newUser.id,
-                name: newUser.name,
-                email: newUser.email
-            }));
-           
-             window.location.href = 'artifacts.html';
-            console.log('sessionToken:', newUser.sessionToken);
-        } else {
-            alert('Failed to register user. Please try again.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while registering the user.');
-    }
-}
 async function handleLogin(form) {
-    const email = form.querySelector('input[name="email"]').value;
-    const password = form.querySelector('input[name="password"]').value;
+    const email = form.querySelector('input[name="email"]').value.trim();
+    const password = form.querySelector('input[name="password"]').value.trim();
 
     let errors = [];
 
-    const inputFields = document.querySelectorAll('input[required]');
-
+    const inputFields = form.querySelectorAll('input[required]');
     inputFields.forEach(field => {
         if (field.value.trim() === '') {
             errors.push(`Field ${field.name} is required.`);
@@ -166,7 +168,7 @@ async function handleLogin(form) {
     });
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
+    if (email && !emailPattern.test(email)) {
         errors.push("Please enter a valid email address.");
     }
 
@@ -175,19 +177,21 @@ async function handleLogin(form) {
     }
 
     if (errors.length > 0) {
-        alert(errors.join("\n"));
+        displayErrorMessage(errors.join("\n"));
         return;
     }
+
+    // Clear any previous error messages
+    displayErrorMessage('');
 
     try {
         const users = await getUsers();
         const user = users.find(user => user.email === email && user.password === password);
 
         if (user) {
-           
             const sessionToken = btoa(email + ':' + Date.now());
             console.log('sessionToken:', sessionToken);
-           
+
             const updateResponse = await fetch(`http://localhost:3000/users/${user.id}`, {
                 method: 'PATCH',
                 headers: {
@@ -198,7 +202,7 @@ async function handleLogin(form) {
 
             if (updateResponse.ok) {
                 const updatedUser = await updateResponse.json();
-               
+
                 localStorage.setItem('sessionToken', sessionToken);
                 localStorage.setItem('currentUser', JSON.stringify({
                     id: updatedUser.id,
@@ -207,18 +211,18 @@ async function handleLogin(form) {
                 }));
                 console.log(`Login successful! Welcome back, ${updatedUser.name}!`);
                 window.location.href = 'artifacts.html';
-                console.log('sessionToken:', sessionToken);
             } else {
-                alert('Error updating session. Please try again.');
+                displayErrorMessage('Error updating session. Please try again.');
             }
         } else {
-            alert('Invalid email or password. Please try again.');
+            displayErrorMessage('Invalid email or password. Please try again.');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while logging in.');
+        displayErrorMessage('An error occurred while logging in.');
     }
 }
+
 // Handle admin login form submission
 const adminLoginForm = document.getElementById('adminLoginForm');
 
@@ -392,5 +396,5 @@ function requireAuth() {
 }
 
 // Initial auth check
-checkAuthStatus();
+// checkAuthStatus();
 

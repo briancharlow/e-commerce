@@ -5,7 +5,7 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "Admin@123",
-      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc1NDY5MzUwNjY="
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc1NjE5MDIwNjQ="
     },
     {
       "id": "c37b",
@@ -119,21 +119,27 @@
       "email": "adminrrr@gmail.com",
       "password": "Admin@123",
       "sessionToken": null
+    },
+    {
+      "id": "ea5a",
+      "name": "Daniel James",
+      "email": "admin55rr@gmail.com",
+      "password": "Admin@1234",
+      "sessionToken": null
+    },
+    {
+      "id": "47c0",
+      "name": "",
+      "email": "",
+      "password": "",
+      "sessionToken": "OjE3Mzc1NjExMjQyMjA="
     }
   ],
   "products": [
     {
-      "title": "The Wind Whispers",
-      "description": "1785 marble sculpture ",
-      "artist": "Dante",
-      "image": "https://images.pexels.com/photos/1727658/pexels-photo-1727658.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "price": 20000,
-      "id": "a8e3"
-    },
-    {
       "title": "Smiling Clown",
       "description": "multicolored skull decor",
-      "artist": "John",
+      "artist": "Johny",
       "image": "https://images.pexels.com/photos/1918290/pexels-photo-1918290.jpeg?auto=compress&cs=tinysrgb&w=600",
       "price": 80000,
       "id": "5cad"
@@ -147,12 +153,12 @@
       "id": "ffc5"
     },
     {
-      "id": "18aa",
       "title": "Abyss Eyes",
       "description": "Dark Murale",
       "artist": "Murale",
       "image": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "price": 600
+      "price": 600,
+      "id": "18aa"
     },
     {
       "title": "Flying Man",
@@ -171,12 +177,12 @@
       "price": 700099
     },
     {
-      "id": "c54b",
       "title": "Revenant",
-      "description": "revvv",
+      "description": "rev",
       "artist": "Dante",
       "image": "https://images.pexels.com/photos/1022934/pexels-photo-1022934.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "price": 900000
+      "price": 900000,
+      "id": "c54b"
     }
   ],
   "cart": [
