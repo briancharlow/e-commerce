@@ -1,15 +1,15 @@
 const Form = document.getElementById('join');
 
-function displayErrorMessage(message) {
-    const errorMessageDiv = document.getElementById('errorMessage');
-    errorMessageDiv.textContent = message;
-    errorMessageDiv.classList.add('show');
+// function displayErrorMessage(message) {
+//     const errorMessageDiv = document.getElementById('errorMessage');
+//     errorMessageDiv.textContent = message;
+//     errorMessageDiv.classList.add('show');
 
     
-    setTimeout(() => {
-        errorMessageDiv.classList.remove('show');
-    }, 5000); 
-}
+//     setTimeout(() => {
+//         errorMessageDiv.classList.remove('show');
+//     }, 5000); 
+// }
 
 async function getUsers() {
     try {
@@ -32,7 +32,7 @@ async function getUsers() {
 Form.addEventListener('click', (event) => {
     if (event.target.id === 'loginSwitch') {
         Form.innerHTML = `
-        <div id="errorMessage" class="error-message"></div>
+    
             <h1>Welcome Back!</h1>
             <form>
                 <input type="email" placeholder="Email" name="email">
@@ -151,7 +151,6 @@ async function handleRegister(form) {
         alert('An error occurred while registering the user.');
     }
 }
-
 async function handleLogin(form) {
     const email = form.querySelector('input[name="email"]').value;
     const password = form.querySelector('input[name="password"]').value;
