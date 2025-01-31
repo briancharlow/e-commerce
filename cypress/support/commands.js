@@ -25,11 +25,11 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', (email, password) => {
-    cy.visit('http://127.0.0.1:5500/index.html'); // Visit the login page
-    cy.get('#loginSwitch').click(); // Click on the login switch
-    cy.get('#login-email').type(email); // Type in the email
-    cy.get('#login-password').type(password); // Type in the password
-    cy.get('#login').click(); // Click on the login button
+    cy.visit('http://127.0.0.1:5500/index.html'); 
+    cy.get('#loginSwitch').click();
+    cy.get('#login-email').type(email); 
+    cy.get('#login-password').type(password);
+    cy.get('#login').click(); 
   });
   
 
