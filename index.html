@@ -32,10 +32,10 @@
                    
                     <form id="adminLoginForm" class="admin-login">
                        
-                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <input type="email" id="email" name="email" placeholder="Email" data-cy="admin-email" required>
                        
-                        <input type="password" id="password" name="password" placeholder="password" required>
-                        <button type="submit">Login</button>
+                        <input type="password" id="password" name="password" placeholder="password" data-cy="admin-password" required>
+                        <button type="submit" data-cy="admin-login">Login</button>
                     </form>
                 </div>
             </div>
@@ -56,9 +56,9 @@
                     <div id="errorMessage" class="error-message"></div>
                     <h1>Join Us Today!</h1>
                     <form>
-                        <input type="text" name="name" placeholder="Name" >
-                        <input type="email" name="email" placeholder="Email" >
-                        <input type="password" name="password" placeholder="Password must be at least 8 characters long, have at least an uppercase letter & one number" >
+                        <input type="text" name="name" placeholder="Name" id="signup-name">
+                        <input type="email" name="email" placeholder="Email" id="signup-email" >
+                        <input type="password" name="password" placeholder="Password must be at least 8 characters long, have at least an uppercase letter & one number" id="signup-password">
                         <button type="submit" id="register">Register</button>
                     </form>
                     <p>Already have an account?<a id="loginSwitch" href="#">Login</a></p>

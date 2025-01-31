@@ -67,5 +67,19 @@ function requireAuth() {
     });
 }
 
+
+
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+function validatePassword(password) {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return passwordPattern.test(password);
+}
+
 // Export the functions so they can be imported by other files
-export { requireAuth, verifySession, logout, getUsers };
+// export { requireAuth, verifySession, logout, getUsers };
+
+module.exports = {validateEmail, validatePassword, requireAuth }

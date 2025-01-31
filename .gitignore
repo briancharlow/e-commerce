@@ -1,6 +1,7 @@
 # Node.js dependencies
 node_modules/
-
+# Jest coverage directory
+coverage/
 # Build directories
 dist/
 build/

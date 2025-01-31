@@ -1,7 +1,7 @@
-import { requireAuth } from './auth-utils.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    requireAuth();
+ 
 
     const gallery = document.getElementById('gallery');
     const messageDiv = document.getElementById('Message'); // Add a div in HTML for messages

@@ -5,7 +5,7 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "Admin@123",
-      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3Mzc1NjU4MjE5MjU="
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3MzgzMzE2ODU5ODE="
     },
     {
       "id": "c37b",
@@ -133,6 +133,20 @@
       "email": "",
       "password": "",
       "sessionToken": "OjE3Mzc1NjExMjQyMjA="
+    },
+    {
+      "id": "012d",
+      "name": "Brian Kyalo",
+      "email": "briankyalo41e6@gmail.com",
+      "password": "Werftrfd@435",
+      "sessionToken": "YnJpYW5reWFsbzQxZTZAZ21haWwuY29tOjE3MzgzMjM4MDQwODM="
+    },
+    {
+      "id": "71a5",
+      "name": "test",
+      "email": "briankyalo@gmail.com",
+      "password": "Brian@1324",
+      "sessionToken": "YnJpYW5reWFsb0BnbWFpbC5jb206MTczODMzMTY4NDMxMw=="
     }
   ],
   "products": [
@@ -183,6 +197,22 @@
       "image": "https://images.pexels.com/photos/1022934/pexels-photo-1022934.jpeg?auto=compress&cs=tinysrgb&w=600",
       "price": 900000,
       "id": "c54b"
+    },
+    {
+      "id": "8f4f",
+      "title": "kenya",
+      "description": "1785 marble sculpture",
+      "artist": "Dante",
+      "image": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "price": 699900
+    },
+    {
+      "id": "6cc3",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
     }
   ],
   "cart": [
@@ -383,6 +413,105 @@
       "userId": "1",
       "time": "2025-01-22T16:53:22.177Z",
       "isCheckedOut": 0,
+      "products": []
+    },
+    {
+      "id": "edf5",
+      "userId": "012d",
+      "time": "2025-01-31T12:10:30.831Z",
+      "isCheckedOut": 0,
+      "products": [
+        {
+          "productId": "18aa",
+          "productTitle": "Abyss Eyes",
+          "quantity": 1,
+          "price": 600,
+          "image": "https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }
+      ]
+    },
+    {
+      "id": "22f6",
+      "userId": "71a5",
+      "time": "2025-01-31T12:58:13.212Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "8fcb",
+      "userId": "71a5",
+      "time": "2025-01-31T13:28:10.813Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "5875",
+      "userId": "71a5",
+      "time": "2025-01-31T13:35:35.495Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "fbeb",
+      "userId": "71a5",
+      "time": "2025-01-31T13:36:09.143Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "fdc2",
+      "userId": "71a5",
+      "time": "2025-01-31T13:38:21.433Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "d9ae",
+      "userId": "71a5",
+      "time": "2025-01-31T13:45:02.163Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "edb8",
+      "userId": "71a5",
+      "time": "2025-01-31T13:53:18.987Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "c356",
+      "userId": "71a5",
+      "time": "2025-01-31T13:53:28.498Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "7bfc",
+      "userId": "71a5",
+      "time": "2025-01-31T13:53:45.777Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "daba",
+      "userId": "71a5",
+      "time": "2025-01-31T13:53:59.582Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "bd8b",
+      "userId": "71a5",
+      "time": "2025-01-31T13:54:08.174Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "eff4",
+      "userId": "71a5",
+      "time": "2025-01-31T13:54:41.616Z",
+      "isCheckedOut": 1,
       "products": []
     }
   ]

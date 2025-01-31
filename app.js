@@ -15,7 +15,18 @@ function displayErrorMessage(message) {
     }
 }
 
+function validateEmail(email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+function validatePassword(password) {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return passwordPattern.test(password);
+}
+
 async function handleRegister(form) {
+
     const name = form.querySelector('input[name="name"]').value.trim();
     const email = form.querySelector('input[name="email"]').value.trim();
     const password = form.querySelector('input[name="password"]').value.trim();
@@ -29,13 +40,15 @@ async function handleRegister(form) {
         }
     });
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && !emailPattern.test(email)) {
+    validateEmail(email);
+
+    console.log('email test:', validateEmail(email));
+    if (email && !validateEmail(email)) {
         errors.push("Please enter a valid email address.");
     }
 
-    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-    if (password && !passwordPattern.test(password)) {
+    validatePassword(password);
+    if (password && !validatePassword(password)) {
         errors.push("Password must be at least 8 characters long, contain at least one uppercase letter and one number.");
     }
 
@@ -118,8 +131,8 @@ Form.addEventListener('click', (event) => {
             <div id="errorMessage" class="error-message"></div>
             <h1>Welcome Back!</h1>
             <form>
-                <input type="email" placeholder="Email" name="email">
-                <input type="password" name="password" placeholder="Password">
+                <input type="email" placeholder="Email" name="email" id="login-email">
+                <input type="password" name="password" placeholder="Password" id="login-password">
                 <button type="submit" id="login">Login</button>
             </form>
             <p>Don't have an account? <a href="#" id="registerSwitch">Register</a></p>
@@ -254,7 +267,7 @@ adminLoginForm.addEventListener('submit', async (event) => {
     try {
         const users = await getUsers(); // Fetch users from JSON server
 
-        // Check if user exists with matching email and password
+        
         const user = users.find(user => user.email === email && user.password === password);
 
         if (user) {
@@ -279,13 +292,13 @@ adminLoginForm.addEventListener('submit', async (event) => {
                     email: updatedUser.email
                 }));
             if (email === 'admin@gmail.com') {
-                // Navigate to admin page
+               
                 window.location.href = 'admin.html';
             } else {
-                // User is authenticated but not an admin
+                
                 alert(`Login successful! Welcome back, ${user.name}!`);
                 console.log(`Login successful! Welcome back, ${user.name}!`);
-                // Redirect to a regular user dashboard or home page
+                
                 window.location.href = 'artifacts.html';
             }
         } else {
@@ -303,50 +316,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const openModalButton = document.getElementById('openModal');
     const closeModalButton = document.querySelector('.close');
     
-    // Open the modal when the admin button is clicked
+    
     openModalButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent default anchor behavior
-        modal.style.display = 'block'; // Show the modal
+        event.preventDefault(); 
+        modal.style.display = 'block'; 
     });
 
-    // Close the modal when the close button is clicked
     closeModalButton.addEventListener('click', () => {
-        modal.style.display = 'none'; // Hide the modal
+        modal.style.display = 'none';
     });
 
     // Close the modal when clicking outside of it
     window.addEventListener('click', (event) => {
         if (event.target === modal) {
-            modal.style.display = 'none'; // Hide the modal
+            modal.style.display = 'none'; 
         }
     });
 
 });
-
-
-
-// Check if user is already logged in
-// function checkAuthStatus() {
-//     const sessionToken = localStorage.getItem('sessionToken');
-//     const currentUser = localStorage.getItem('currentUser');
-
-//     if (sessionToken && currentUser) {
-//         // Verify token is still valid in JSON Server
-//         verifySession(sessionToken).then(isValid => {
-//             if (isValid) {
-//                 // If on login page, redirect to artifacts
-//                 if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-//                     window.location.href = 'artifacts.html';
-//                 }
-//             } else {
-//                 // If session is invalid, clear storage
-//                 logout();
-//             }
-//         });
-//     }
-// }
-
-// Verify session token against JSON Server
 async function verifySession(sessionToken) {
     try {
         const users = await getUsers();
@@ -360,7 +347,6 @@ async function verifySession(sessionToken) {
     }
 }
 
-// Logout function
 function logout() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     
@@ -395,6 +381,5 @@ function requireAuth() {
     });
 }
 
-// Initial auth check
-// checkAuthStatus();
+
 
