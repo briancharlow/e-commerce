@@ -5,7 +5,7 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "Admin@123",
-      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3MzgzMzE2ODU5ODE="
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3MzgzMzIyNjE3OTQ="
     },
     {
       "id": "c37b",
@@ -146,7 +146,7 @@
       "name": "test",
       "email": "briankyalo@gmail.com",
       "password": "Brian@1324",
-      "sessionToken": "YnJpYW5reWFsb0BnbWFpbC5jb206MTczODMzMjI1MTA2MA=="
+      "sessionToken": "YnJpYW5reWFsb0BnbWFpbC5jb206MTczODMzMjI1NDY2MA=="
     }
   ],
   "products": [
@@ -208,6 +208,14 @@
     },
     {
       "id": "6cc3",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "fb08",
       "title": "Test Artwork",
       "description": "A beautiful test artwork description",
       "artist": "Test Artist",
