@@ -9,20 +9,56 @@ describe('user spec', () => {
 
   // it('signs up new user', () => {
   //   cy.get('#signup-name').type('test') 
-  //   cy.get('#signup-email').type('briankyalo@gmail.com')
+  //   cy.get('#signup-email').type('briankyalo436@gmail.com')
   //   cy.get('#signup-password').type('Brian@1324')
   //   cy.get('#register').click()
    
   // })
 
+  it('rejects signing up with already existing email', () => {
+    cy.visit('http://127.0.0.1:5500/index.html')
+      cy.get('#signup-name').type('test') 
+      cy.get('#signup-email').type('briankyalo416@gmail.com')
+      cy.get('#signup-password').type('Brian@1324')
+      cy.get('#register').click()
+
+      cy.get('#errorMessage').should('be.visible').and('contain', 'This email is already registered. Please use a different email.');
+     
+    })
+
+    
+  it('rejects signing up with invalid password', () => {
+    cy.visit('http://127.0.0.1:5500/index.html')
+      cy.get('#signup-name').type('test') 
+      cy.get('#signup-email').type('briankyalo4196@gmail.com')
+      cy.get('#signup-password').type('Brian1324')
+      cy.get('#register').click()
+
+      cy.get('#errorMessage').should('be.visible').and('contain', 'Password must be at least 8 characters long, contain at least one uppercase letter and one number.');
+     
+    })
+
+
 
   //Test 2 Login
-  it('logs in user', () => {
+
+
+  it('logs in with right credentials user', () => {
     cy.visit('http://127.0.0.1:5500/index.html')
     cy.get('#loginSwitch').click()
     cy.get('#login-email').type('briankyalo@gmail.com')
     cy.get('#login-password').type('Brian@1324')
     cy.get('#login').click()
+  })
+
+  it('rejects logs in with wrong credentials user', () => {
+    cy.visit('http://127.0.0.1:5500/index.html')
+    cy.get('#loginSwitch').click()
+    cy.get('#login-email').type('briankyalo@gmail.com')
+    cy.get('#login-password').type('Brian@1324')
+    cy.get('#login').click()
+
+    cy.get('#errorMessage').should('be.visible').and('contain', 'Invalid email or password. Please try again.');
   })
 
  

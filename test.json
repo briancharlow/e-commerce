@@ -5,7 +5,7 @@
       "name": "Admin",
       "email": "admin@gmail.com",
       "password": "Admin@123",
-      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3MzgzMzIyNjE3OTQ="
+      "sessionToken": "YWRtaW5AZ21haWwuY29tOjE3MzgzMzM3MTE5NzA="
     },
     {
       "id": "c37b",
@@ -146,7 +146,14 @@
       "name": "test",
       "email": "briankyalo@gmail.com",
       "password": "Brian@1324",
-      "sessionToken": "YnJpYW5reWFsb0BnbWFpbC5jb206MTczODMzMjI1NDY2MA=="
+      "sessionToken": "YnJpYW5reWFsb0BnbWFpbC5jb206MTczODMzMzcwOTgzMw=="
+    },
+    {
+      "id": "41d7",
+      "name": "test",
+      "email": "briankyalo4196@gmail.com",
+      "password": "Brian1324",
+      "sessionToken": "YnJpYW5reWFsbzQxOTZAZ21haWwuY29tOjE3MzgzMzMyODI2MjU="
     }
   ],
   "products": [
@@ -216,6 +223,102 @@
     },
     {
       "id": "fb08",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "76e2",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "4b79",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "78ec",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "3396",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "14ee",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "8f9f",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "8b16",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "af22",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "8389",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "efb2",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "8ca8",
+      "title": "Test Artwork",
+      "description": "A beautiful test artwork description",
+      "artist": "Test Artist",
+      "image": "https://example.com/test-image.jpg",
+      "price": 1000
+    },
+    {
+      "id": "5b2b",
       "title": "Test Artwork",
       "description": "A beautiful test artwork description",
       "artist": "Test Artist",
@@ -519,6 +622,55 @@
       "id": "eff4",
       "userId": "71a5",
       "time": "2025-01-31T13:54:41.616Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "653f",
+      "userId": "71a5",
+      "time": "2025-01-31T14:07:44.514Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "f2ff",
+      "userId": "71a5",
+      "time": "2025-01-31T14:14:13.905Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "0433",
+      "userId": "71a5",
+      "time": "2025-01-31T14:15:44.544Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "b9ca",
+      "userId": "71a5",
+      "time": "2025-01-31T14:16:36.407Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "c086",
+      "userId": "71a5",
+      "time": "2025-01-31T14:21:30.220Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "ee10",
+      "userId": "71a5",
+      "time": "2025-01-31T14:27:33.079Z",
+      "isCheckedOut": 1,
+      "products": []
+    },
+    {
+      "id": "77d8",
+      "userId": "71a5",
+      "time": "2025-01-31T14:28:27.098Z",
       "isCheckedOut": 1,
       "products": []
     }
